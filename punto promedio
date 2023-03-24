@@ -42,8 +42,10 @@ const average = {
 let students_male = 0
 let students_female = 0
 students.forEach((student) => {
-    if (student.sex === 'F') students_female += 1;
-    else students_male += 1
+    if (student.sex === 'F')
+    students_female += 1;
+    else
+    students_male += 1;
 
     average.average_sex[student.sex] += student.average;
     if (student.average < 3) average.FP += 1;
@@ -59,3 +61,12 @@ average.average_sex.F /= students_female
 average.average_sex.M /= students_male
 
 
+
+console.log("fuera del programa:" +average.FP);
+console.log("período de prueba:" +average.PP);
+console.log("Normal:" + average.N);
+console.log("Distinguido:" +average.D);
+console.log("promedio acum mujeres:" +average.average_sex.F)
+console.log("promedio acum hombres:" +average.average_sex.M);
+console.log("mayor promedio:" +average.maximum);
+console.log("menor promedio:" +average.minimum);
