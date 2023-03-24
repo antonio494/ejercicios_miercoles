@@ -1,0 +1,17 @@
+import java.util.HashMap;
+
+public class Main {
+  public static void main(String[] args) {
+    HashMap<String, Integer> estudiantes = new HashMap<String, Integer, double>();
+
+    estudiantes.put("Roberto","promedio", 3.5, "sexo", "M");
+    estudiantes.put("Carlos","promedio", 4, "sexo", "M");
+    estudiantes.put("Carolina","promedio", 4.8, "sexo", "F");
+     estudiantes.put("Carla","promedio", 2.5, "sexo","F");
+      estudiantes.put("Pedro","promedio", 3, "sexo", "M");
+
+    for (String i : estudiantes.keySet()) {
+      System.out.println("Name: " + i + " Age: " + estudiantes.get(i));
+    }
+  }
+}
