@@ -1,5 +1,5 @@
 import java.util.Scanner;
-public class Main{ 
+public class Punto_fibonacci{ 
     public static void main(String []args){ 
         Scanner objeto = new Scanner(System.in);
         int x = 0, z = 1, c, w; 
