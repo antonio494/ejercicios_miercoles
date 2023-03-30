@@ -1,37 +1,57 @@
-def calcular_estadisticas():
-    num_estudiantes = int(input("Ingrese la cantidad de estudiantes: "))
+def ejercicio_promedio(estudiantes):
+    promedios_mujeres = []
+    promedios_hombres = []
+    promedios_fp = []
+    promedios_pp = []
+    promedios_n = []
+    promedios_d = []
+    for estudiante in estudiantes.values():
+        promedio = estudiante["promedio_acumulado"]
+        sexo = estudiante["sexo"]
+        situacion = estudiante["situacion"]
 
-    total_promedios = 0
-    promedio_mujeres = 0
-    promedio_hombres = 0
-    mujeres = 0
-    hombres = 0
-
-    for i in range(num_estudiantes):
-        nombre = input(f"Ingrese el nombre del estudiante {i+1}: ")
-        promedio = float(input(f"Ingrese el promedio acumulado de {nombre}: "))
-        sexo = input(f"Ingrese el sexo de {nombre} (M/F): ")
-        total_promedios += promedio
-        if sexo == "F":
-            promedio_mujeres += promedio
-            mujeres += 1
+        if sexo == "M":
+            promedios_hombres.append(promedio)
         else:
-            promedio_hombres += promedio
-            hombres += 1
+            promedios_mujeres.append(promedio)
 
-    promedio_promedios = total_promedios / num_estudiantes
+        if situacion == "FP":
+            promedios_fp.append(promedio)
+        elif situacion == "PP":
+            promedios_pp.append(promedio)
+        elif situacion == "N":
+            promedios_n.append(promedio)
+        elif situacion == "D":
+            promedios_d.append(promedio)
 
-    if mujeres > 0:
-        promedio_mujeres /= mujeres
-    if hombres > 0:
-        promedio_hombres /= hombres
+    promedios_por_sexo = [("Mujeres", promedios_mujeres), ("Hombres", promedios_hombres)]
+    promedios_por_situacion = [("FP", promedios_fp), ("PP", promedios_pp), ("N", promedios_n), ("D", promedios_d)]
+    promedios = {"promedios": promedios_por_sexo + promedios_por_situacion}
 
-    resultados = {
-        "cantidad_estudiantes": num_estudiantes,
-        "promedio_promedios": promedio_promedios,
-        "promedio_mujeres": promedio_mujeres,
-        "promedio_hombres": promedio_hombres
-    }
-    return resultados
-resultados = calcular_estadisticas()
-print("El promedio de los promedios es:", resultados["promedio_promedios"])
+    if promedios_mujeres:
+        promedios["promedio_mujeres"] = sum(promedios_mujeres) / len(promedios_mujeres)
+    if promedios_hombres:
+        promedios["promedio_hombres"] = sum(promedios_hombres) / len(promedios_hombres)
+    if promedios_fp:
+        promedios["promedio_fp"] = sum(promedios_fp) / len(promedios_fp)
+    if promedios_pp:
+        promedios["promedio_pp"] = sum(promedios_pp) / len(promedios_pp)
+    if promedios_n:
+        promedios["promedio_n"] = sum(promedios_n) / len(promedios_n)
+    if promedios_d:
+        promedios["promedio_d"] = sum(promedios_d) / len(promedios_d)
+
+    promedios_todos = promedios_mujeres + promedios_hombres + promedios_fp + promedios_pp + promedios_n + promedios_d
+    promedios["máximo"] = max(promedios_todos)
+    promedios["mínimo"] = min(promedios_todos)
+    return promedios
+num_estudiantes = int(input("Ingrese la cantidad de estudiantes: "))
+estudiantes = {}
+for i in range(num_estudiantes):
+    nombre = input(f"Ingrese el nombre del estudiante {i+1}: ")
+    promedio = float(input(f"Ingrese el promedio acumulado de {nombre}: "))
+    sexo = input(f"Ingrese el sexo de {nombre} (M/F): ")
+    situacion = input(f"Ingrese la situación de {nombre} (FP/PP/N/D): ")
+    estudiantes[nombre] = {"promedio_acumulado": promedio, "sexo": sexo, "situacion": situacion}
+resultados = ejercicio_promedio(estudiantes)
+print("sus Resultados son:", estudiantes)
